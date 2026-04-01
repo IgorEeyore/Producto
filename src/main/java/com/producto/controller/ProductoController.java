@@ -87,7 +87,8 @@ public class ProductoController {
     public ResponseEntity<?> deleteProducto(@PathVariable int id_producto){
         response.put("timestamp", LocalDateTime.now());
         response.put("status", HttpStatus.OK.value());
-        response.put("data", productoService.deleteProducto(id_producto));
+        response.put("message", "Producto eliminado correctamente");
+        response.put("data", null);
 
         return ResponseEntity.ok(response);
     }
