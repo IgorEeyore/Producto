@@ -11,6 +11,9 @@ import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,6 +44,23 @@ public class Producto {
     @Positive(message = "El numero no puede ser menor a cero")
     @Column(nullable = false)
     private int stock;
-
     // @Positive permite que el valor de la variable no pueda ser negativo
+
+    // NUEVO
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
+    public Producto(String nombre_producto, Double precio, int stock){
+        this.nombre_producto = nombre_producto;
+        this.precio = precio;
+        this.stock = stock;
+    }
+
+    public Producto(String nombre_producto, Double precio, int stock, Categoria categoria){
+        this.nombre_producto = nombre_producto;
+        this.precio = precio;
+        this.stock = stock;
+        this.categoria = categoria;
+    }
 }
